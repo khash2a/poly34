@@ -8,8 +8,11 @@ Linear and quadratic equations with real coefficients are easy to solve. For the
 x^3 + a*x^2 + b*x + c = 0
 
 may be computed by the function
+
 int   SolveP3(double *x,double a,double b,double c);
+
 Here x is an array of size 3.
+
 In the case of three real roots function returns the number 3, the roots themselves back in x[0],x[1],x[2].
 
 Remark 1. Roots are not necessarily ordered!
@@ -17,7 +20,7 @@ If two roots are match, the function returns 2 and in the array x still there ar
 
 If the function returns 1, then x[0] is a real root and x[1] ± i*x[2] is a pair of coplex-conjugated roots.
 
-Remark 2. Due to rounding errors pair of complex conjugate roots with a very small imaginary part can sometimes be a real root of multiplicity 2. For example, for equation x3 - 5x2 + 8x - 4 = 0 with roots 1,2,2 we obtain roots     1.0, 2.0Бi*9.6e-17. If the absolute value of the imaginary part of the root not greater than 1e-14, the SolveP3 itself replaces a pair on one valid double root, but the user must still be aware of the possibility of such a situation.
+Remark 2. Due to rounding errors pair of complex conjugate roots with a very small imaginary part can sometimes be a real root of multiplicity 2. For example, for equation x^3 - 5x^2 + 8x - 4 = 0 with roots 1,2,2 we obtain roots     1.0, 2.0Бi*9.6e-17. If the absolute value of the imaginary part of the root not greater than 1e-14, the SolveP3 itself replaces a pair on one valid double root, but the user must still be aware of the possibility of such a situation.
 
 Quartic equation
 ----------------
@@ -45,8 +48,11 @@ Quintic equation
 All roots of the quintic equation
 
 f(x) = x^5 + a*x^4 + b*x^3 + c*x^2 + d*x + e = 0
+
 not greater than
+
 brd = 1 + max( |a|, |b|, |c|, |d|, |e| ).
+
 Quintic equation have at least one real root. To find it, starting with the interval [-brd, brd] make 6 "bisections". Then check the root using the Newton method.
 
 Finding one real root x0, divide it original polynomial f(x) and find the roots of the resulting polynomial of degree 4.
