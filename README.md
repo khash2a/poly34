@@ -60,7 +60,9 @@ Finding one real root x0, divide it original polynomial f(x) and find the roots 
 The solution of a quintic equation may be computed by the function
 
 int   SolveP5(double *x,double a,double b,double c,double d, double e);
+
 Here x is an array of size 5.
+
 In the case of 5 real roots function returns the number 5, the roots themselves back in x[0],x[1],x[2],x[3], x[4].
 
 In the case of 3 real and a pair of complex conjugate roots function returns the number 3, x[0],x[1],x[2] are the real roots and x[3] ± i*x[4] is a complex.
