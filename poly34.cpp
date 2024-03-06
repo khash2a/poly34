@@ -69,14 +69,14 @@ int SolveP3(double *x,double a,double b,double c) {	// solve cubic equation x^3 
 	double a2 = a*a;
     double q  = (a2 - 3*b)/9; 
 	double r  = (a*(2*a2-9*b) + 27*c)/54;
-	// equation y^3 - 3q*y + r/2 = 0 where x = y-a/3
-	if (fabs(q) < eps) {		// y^3 =-r/2	!!! Thanks to John Fairman <jfairman1066@gmail.com>
+	// equation y^3 - 3q*y + 2*r = 0 where x = y-a/3
+	if (fabs(q) < eps) {		// y^3 =-2*r
 		if (fabs(r) < eps) {	// three identical roots
 			x[0] = x[1] = x[2] = -a/3;
 			return(3);
 		}
-		// y^3 =-r/2
-		x[0] = root3(-r/2);
+		// y^3 =-2*r
+		x[0] = root3(-2*r) - a/3;
 		x[1] = x[0] * 0.5;
 		x[2] = x[0] * sqrt(3.) / 2;
 		return(1);
