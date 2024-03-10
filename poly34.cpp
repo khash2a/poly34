@@ -47,7 +47,7 @@ double root3 ( double x )
 
 // x - array of size 2
 // return 2: 2 real roots x[0], x[1]
-// return 0: pair of complex roots: x[0]±i*x[1]
+// return 0: pair of complex roots: x[0]Â±i*x[1]
 int   SolveP2(double *x, double a, double b) {			// solve equation x^2 + a*x + b = 0
 	double D = 0.25*a*a - b;
 	if (D >= 0) {
@@ -64,10 +64,10 @@ int   SolveP2(double *x, double a, double b) {			// solve equation x^2 + a*x + b
 // x - array of size 3
 // In case 3 real roots: => x[0], x[1], x[2], return 3
 //         2 real roots: x[0], x[1],          return 2
-//         1 real root : x[0], x[1] ± i*x[2], return 1
+//         1 real root : x[0], x[1] Â± i*x[2], return 1
 int SolveP3(double *x,double a,double b,double c) {	// solve cubic equation x^3 + a*x^2 + b*x + c = 0
 	double a2 = a*a;
-    double q  = (a2 - 3*b)/9; 
+        double q  = (a2 - 3*b)/9; 
 	double r  = (a*(2*a2-9*b) + 27*c)/54;
 	// equation y^3 - 3q*y + r/2 = 0 where x = y-a/3
 	if (fabs(q) < eps) {		// y^3 =-r/2	!!! Thanks to John Fairman <jfairman1066@gmail.com>
@@ -76,13 +76,14 @@ int SolveP3(double *x,double a,double b,double c) {	// solve cubic equation x^3 
 			return(3);
 		}
 		// y^3 =-r/2
-		x[0] = root3(-r/2);
+		//x[0] = root3(-r / 2);
+		x[0] = root3(-2 * r);	// Sebastien Berthet <seb.berthet@gmail.com>
 		x[1] = x[0] * 0.5;
 		x[2] = x[0] * sqrt(3.) / 2;
 		return(1);
 	}
 	// now favs(q)>eps
-    double r2 = r*r;
+        double r2 = r*r;
 	double q3 = q*q*q;
 	double A,B;
 	if (r2 <= (q3 + eps)) {//<<-- FIXED!
@@ -219,9 +220,9 @@ int   SolveP4De(double *x, double b, double c, double d)	// solve equation x^4 +
 		if( c>0 )	// sign = -1
 		{
 			x[0] = -sz3/2;					
-			x[1] = ( sz1 -sz2)/2;		// x[0]±i*x[1]
+			x[1] = ( sz1 -sz2)/2;		// x[0]Â±i*x[1]
 			x[2] =  sz3/2;
-			x[3] = (-sz1 -sz2)/2;		// x[2]±i*x[3]
+			x[3] = (-sz1 -sz2)/2;		// x[2]Â±i*x[3]
 			return 0;
 		}
 		// now: c<0 , sign = +1
@@ -233,7 +234,7 @@ int   SolveP4De(double *x, double b, double c, double d)	// solve equation x^4 +
 	} // if( res3>1 )	// 3 real roots, 
 	// now resoventa have 1 real and pair of compex roots
 	// x[0] - real root, and x[0]>0, 
-	// x[1]±i*x[2] - complex roots, 
+	// x[1]Â±i*x[2] - complex roots, 
 	// x[0] must be >=0. But one times x[0]=~ 1e-17, so:
 	if (x[0] < 0) x[0] = 0;
 	double sz1 = sqrt(x[0]);
@@ -265,8 +266,8 @@ double N4Step(double x, double a,double b,double c,double d)	// one Newton step 
 //-----------------------------------------------------------------------------
 // x - array of size 4
 // return 4: 4 real roots x[0], x[1], x[2], x[3], possible multiple roots
-// return 2: 2 real roots x[0], x[1] and complex x[2]±i*x[3], 
-// return 0: two pair of complex roots: x[0]±i*x[1],  x[2]±i*x[3], 
+// return 2: 2 real roots x[0], x[1] and complex x[2]Â±i*x[3], 
+// return 0: two pair of complex roots: x[0]Â±i*x[1],  x[2]Â±i*x[3], 
 int   SolveP4(double *x,double a,double b,double c,double d) {	// solve equation x^4 + a*x^3 + b*x^2 + c*x + d by Dekart-Euler method
 	// move to a=0:
 	double d1 = d + 0.25*a*( 0.25*b*a - 3./64*a*a*a - c);
